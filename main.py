@@ -9,7 +9,7 @@ set_site_information(
     description="See how normal human actions effect the environment.",
     sources="Thanks to the Drafter docs.",
     planning=["plan.pdf", "design.pdf"],
-    links=[]
+    links=[https://mconard22.github.io/Environmental-Outcomes]
 )
 hide_debug_information()
 set_website_framed(False)
