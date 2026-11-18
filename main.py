@@ -2,6 +2,7 @@ from drafter import *
 from dataclasses import dataclass, field
 from bakery import assert_equal
 
+set_website_style("yorha")
 
 set_website_title("Environmental Impact Simulator")
 set_site_information(
@@ -9,7 +10,7 @@ set_site_information(
     description="See how normal human actions effect the environment.",
     sources="Thanks to the Drafter docs.",
     planning=["plan.pdf", "design.pdf"],
-    links=["https://mconard22.github.io/Environmental-Outcomes"]
+    links=["https://github.com/mconard22/Environmental-Outcomes"]
 )
 hide_debug_information()
 set_website_framed(False)
@@ -76,19 +77,22 @@ def index(state: State) -> Page:
     """
     return Page(state, [
 
-        "Environmental Impact Simulator!",
+        large_font("Environmental Impact Simulator!"),
 
+        "\n",
         "\nChoose a negative action:",
+
 
         TextBox(
             "action",
             state.selected_action
         ),
 
-        "\nType one of:",
-        "\nBuild Homes",
-        "\nDrive Car",
-        "\nSingle-Use Plastics\n",
+        "\n",
+        large_font("\nType one of:"),
+        small_font("\nBuild Homes"),
+        small_font("\nDrive Car"),
+        small_font("\nSingle-Use Plastics\n"),
 
         Button(
             "Submit Negative Action",
@@ -96,7 +100,7 @@ def index(state: State) -> Page:
         ),
 
         Button(
-            "Positive Actions",
+            "Go to Positive Actions",
             positive_actions
         )
     ])
@@ -144,11 +148,10 @@ def build_homes(state: State) -> Page:
     )
 
     state.status_message = (
-        "Forests may be cleared for development. Also meaning animal habitats are destroyed."
-    )
+        small_font("\nForests may be cleared for development. This also leads to animal habitats being destroyed. \n"))
 
     return Page(state, [
-        "Building Homes:",
+        large_font("Building Homes:"),
 
         state.status_message,
 
@@ -177,11 +180,11 @@ def drive_car(state: State) -> Page:
     )
 
     state.status_message = (
-        "Driving produces carbon emissions, which add to the trapped gases in the atmosphere."
+        small_font("\nDriving produces carbon emissions, which add to the trapped gases in the atmosphere. \n")
     )
 
     return Page(state, [
-        "Driving Cars:",
+        large_font("Driving Cars:"),
 
         state.status_message,
 
@@ -231,11 +234,10 @@ def single_use_plastic(state: State) -> Page:
         )
 
         state.status_message = (
-            "Plastic harms marine life."
-        )
+            small_font("\nPlastic harms marine life by often ending up in the ocean, in their habitats. It also piles up at landfills for many years. \n"))
 
     return Page(state, [
-        "Single-Use Plastics:",
+        large_font("Single-Use Plastics:"),
 
         state.status_message,
 
@@ -254,17 +256,17 @@ def positive_actions(state: State) -> Page:
     """
     return Page(state, [
 
-        "Positive Actions",
+        large_font("Positive Actions! \n\n"),
 
         TextBox(
             "positive_action",
             ""
         ),
 
-        "\nType one of:",
-        "\nPrevent Deforestation",
-        "\nUse Reusables",
-        "\nBike or Walk\n",
+        large_font("\n\nType one of:"),
+        small_font("\nPrevent Deforestation"),
+        small_font("\nUse Reusables"),
+        small_font("\nBike or Walk\n"),
 
         Button(
             "Submit Positive Action",
@@ -316,9 +318,9 @@ def prevent_deforestation(state: State) -> Page:
     )
 
     return Page(state, [
-        "Prevent Deforestation:",
+        large_font("Prevent Deforestation:"),
 
-        "Protecting forests improves ecosystems.",
+        small_font("\nProtecting forests improves ecosystems by increasing the amount of animal habitats. It also adds more clean oxygen into our air! \n"),
 
         Button(
             "Return",
@@ -341,9 +343,9 @@ def reusables(state: State) -> Page:
     )
 
     return Page(state, [
-        "Use Reusables:",
+        large_font("Use Reusables:"),
 
-        "Reusable products reduce pollution.",
+        small_font("\nReusable products reduce the amount of trash in both the ocean and landfills! This helps out the wonderful marine life!\n"),
 
         Button(
             "Return",
@@ -366,9 +368,9 @@ def biking_or_walking(state: State) -> Page:
     )
 
     return Page(state, [
-        "Bike or Walk:",
+        large_font("Bike or Walk:"),
 
-        "Alternative transportation helps Earth.",
+        small_font("\nAlternative transportation helps Earth by reducing carbon emissions from vehicles. Also, exercise is good for you! \n"),
 
         Button(
             "Return",
@@ -389,13 +391,13 @@ def end_page(state: State) -> Page:
     if state.outcomes_viewed >= 3:
 
         state.status_message = (
-            "You explored enough actions!"
+            large_font("You explored enough actions!")
         )
 
     else:
 
         state.status_message = (
-            "Explore more actions first."
+            large_font("Explore more actions first.")
         )
 
     return Page(state, [
@@ -439,7 +441,9 @@ def reset_game(state: State) -> Page:
 
     return index(state)
 
-#unit tests
+"""
+All unit tests are at the bottom of my program.
+"""
 
 # ----------------------------------------
 # add_outcome
